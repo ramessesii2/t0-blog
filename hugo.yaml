@@ -1,0 +1,65 @@
+baseURL: https://t0s-blog.ospo-dev.miralabs.dev/
+languageCode: en-us
+title: T minus T to the Zero
+theme: pehtheme-hugo
+
+# Pagination
+pagination:
+  pagerSize: 10
+
+# Summary and content settings
+summaryLength: 20
+
+params:
+  description: An engineering and operations blog focused on reducing toil, cognitive load, and the inclusion of AIOps in everyday life
+  author:
+    name: T0 Editorial Team
+  mainSections: posts
+  social:
+    github: https://github.com/Mirantis
+
+# Menu configuration
+menu:
+  main:
+    - name: Home
+      pageRef: /
+      weight: 1
+    - name: Posts
+      pageRef: /posts/
+      weight: 2
+    - name: About
+      pageRef: /about/
+      weight: 3
+    - name: Contributing
+      url: https://github.com/mirantis/t0-blog/blob/main/README.md
+      weight: 4
+
+# Markup configuration
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    style: monokai
+    lineNos: true
+
+# Output formats
+outputs:
+  home:
+    - HTML
+    - RSS
+  section:
+    - HTML
+    - RSS
+
+module:
+  hugoVersion:
+    extended: false
+    min: "0.116.0"
+  mounts:
+    - source: assets
+      target: static
+
+caches:
+  images:
+    dir: :cacheDir/images
