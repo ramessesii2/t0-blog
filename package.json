@@ -1,18 +1,26 @@
 {
-  "name": "pehtheme",
+  "name": "tzero-blog",
   "version": "1.0.0",
-  "description": "An open-source Hugo theme lovingly crafted using Tailwind CSS.",
+  "description": "Tzero - An engineering and operations blog focused on reducing toil, cognitive load, and the inclusion of AIOps in every day life.",
   "main": "index.js",
   "scripts": {
-    "dev:generate": "npx tailwindcss -i ./assets/input.css -o ./themes/pehtheme-hugo/assets/css/main.css -w",
-    "dev:hugo": "hugo server",
+    "dev:generate": "npx tailwindcss -i ./input.css -o ./themes/pehtheme-hugo/assets/css/main.css -w",
+    "dev:hugo": "hugo server -D",
     "dev": "run-p dev:*",
-    "build:generate": "npx tailwindcss -i ./assets/input.css -o ./themes/pehtheme/static/assets/css/main.css",
-    "build:hugo": "hugo",
-    "build": "run-p build:*"
+    "build:generate": "npx tailwindcss -i ./input.css -o ./themes/pehtheme-hugo/assets/css/main.css --minify",
+    "build:hugo": "hugo --minify",
+    "build": "run-s build:*"
   },
-  "keywords": ["hugo", "tailwindcss"],
-  "author": "Fauzan My",
+  "keywords": [
+    "hugo",
+    "tailwindcss",
+    "blog",
+    "tzero",
+    "devops",
+    "mlops",
+    "aiops"
+  ],
+  "author": "Tzero Editorial Team",
   "license": "MIT",
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
