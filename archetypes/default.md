@@ -20,8 +20,8 @@ draft: true
 # Brief description/summary of the post (recommended for SEO and post listings)
 description: ""
 
-# Featured image path (optional) - place images in assets/images/
-# Example: "images/my-post-image.jpg"
+# Featured image path (optional) - place images in assets/images/<your-post-name>/
+# Example: "images/<your-post-name>/my-post-image.jpg"
 image: ""
 ---
 

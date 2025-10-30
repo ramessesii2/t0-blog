@@ -7,12 +7,18 @@ The repository that powers the Tzero community blog static site. Built with Hugo
 1. Create a new post:
 
    ```bash
-   hugo new posts/YYYY/YYYY-MM-DD__title-of-your-post.md
+   hugo new posts/YYYY/title-of-your-post.md
    ```
 
 2. Open the generated file and fill in front matter (see below).
 
-3. Add any images into `assets/images/`.
+3. Create an image directory and add images:
+
+   ```bash
+   mkdir -p assets/images/$(basename -s .md content/posts/YYYY/title-of-your-post.md)
+   ```
+
+   Then place all images in `assets/images/<your-post-name>/` (replace `<your-post-name>` with your actual post filename without extension).
 
 4. Preview locally:
 
@@ -23,39 +29,70 @@ The repository that powers the Tzero community blog static site. Built with Hugo
 
 5. When ready to publish, set `draft: false` and open a pull request.
 
-## Front matter (copy–paste)
+## Front matter
+
+When you create a new post with `hugo new`, it will include a template with all fields. Key fields:
 
 ```yaml
 ---
 title: "Your Post Title"
-date: 2025-01-15
+date: 2025-01-15T00:00:00Z
 author: "Your Name"
 tags: ["automation", "kubernetes", "devops"]
+categories: ["engineering", "operations", "tutorials"]
 draft: true
 description: "A brief description of your post"
-image: "images/your-image.jpg"
+image: "images/your-post-name/featured-image.jpg"
 ---
 ```
 
-Write Markdown content **below** the front matter.
+**Required fields:**
 
-Additional notes:
+- `title` - Post title
+- `date` - ISO 8601 format (YYYY-MM-DDTHH:MM:SSZ)
+- `author` - Your name (displayed on the post)
+- `description` - Brief summary for SEO and listings
+- `draft` - Set to `false` when ready to publish
 
-- `date` is YYYY-MM-DD format.
-- Leave `draft: true` while iterating; change to `false` to publish.
-- `tags`, `categories`, and `image` are optional.
+**Optional fields:**
+
+- `tags` - Array of tags for categorization
+- `categories` - Array of categories (e.g., "engineering", "operations", "tutorials")
+- `image` - Featured image path
 
 ## Images & media
 
-- Place images in `assets/images/`.
+**Important:** Always create a dedicated directory for your post's images.
 
-- Reference them in front matter:
+1. **Create the directory:**
 
-  ```yaml
-  image: "images/your-image.jpg"
-  ```
+   ```bash
+   mkdir -p assets/images/your-post-name
+   ```
 
-- Aim for small files (<1 MB). Add meaningful alt text.
+   Replace `your-post-name` with your post filename (without `.md` extension). For example, if your post is `control-plane-load-balancing-explained.md`, use `control-plane-load-balancing-explained`.
+
+2. **Place all images** in `assets/images/<your-post-name>/`
+
+3. **Reference images:**
+
+   - Featured image in front matter:
+
+     ```yaml
+     image: "images/your-post-name/featured-image.jpg"
+     ```
+
+   - Inline images in markdown:
+
+     ```markdown
+     ![Alt text](/images/your-post-name/image-name.png)
+     ```
+
+4. **Best practices:**
+   - Keep files under 1 MB
+   - Use descriptive filenames
+   - Add meaningful alt text
+   - Use PNG for screenshots, JPG for photos
 
 ## Local development
 
@@ -78,7 +115,7 @@ Start a live-reloading development server:
 npm run dev
 ```
 
-Visit http://localhost:1313/ to preview the site.
+Visit <http://localhost:1313/> to preview the site.
 
 For Hugo-only mode (faster, no CSS changes):
 
@@ -90,15 +127,19 @@ hugo server -D
 
 - `title`, `date`, `author`, `description` set
 - `draft: false` for publishing
-- Images load
+- **Images**: All images placed in `assets/images/<your-post-name>/` directory
+- **Image paths**: References use `/images/<your-post-name>/filename.ext` format
+- Images load correctly
 - Links/code blocks render correctly
 - Post matches the tone and headings of existing posts
 
 ## Conventions
 
-- **File name**: use format `YYYY-MM-DD__kebab-case-title.md`
-- **Code blocks**: use fenced blocks with language hints (e.g., `sh`, `yaml`)
-- **Internal links**: prefer relative links within the repository
+- **File name**: `snake-case-title.md` in `content/posts/YYYY/` directory (e.g., `content/posts/2025/my-post-title.md`)
+- **Date format**: ISO 8601 (`2025-01-15T00:00:00Z`)
+- **Code blocks**: Use fenced blocks with language hints (`bash`, `yaml`, `python`, etc.)
+- **Images**: Place in `assets/images/<post-name>/` and reference with `/images/<post-name>/file.png`
+- **Author**: Always include your name in the `author` field (it will be displayed on the post)
 
 ## License
 
